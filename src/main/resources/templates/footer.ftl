@@ -40,7 +40,7 @@
 						
 						<div class="footerp"> 
 						
-							<h2 class="title-median">GrabBreakfast Pvt. Ltd.</h2>
+							<h3 class="title-median">GrabBreakfast Pvt. Ltd.</h3>
 							<p><b>Email id:</b> <a href="mailto:info@grabbreakfast.com">info@grabbreakfast.com</a></p>
 							<p><b>Helpline Numbers </b>
 

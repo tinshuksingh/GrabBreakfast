@@ -19,7 +19,8 @@ getCityList();
  }
  
  function getAreaList(){
-	 var cityId= city.options.selectedIndex;
+	 $("#restList").remove();
+	 var cityId=$('#city').val() 
 	 $.ajax({
 	      	type: 'post',
 	      	url: '/getareas',
@@ -50,7 +51,7 @@ getCityList();
 
  
  function getRestoList(){
-	 var areaId= area.options.selectedIndex;
+	 var areaId= $('#area').val();
 	 $.ajax({
 	      	type: 'post',
 	      	url: '/getrestos',

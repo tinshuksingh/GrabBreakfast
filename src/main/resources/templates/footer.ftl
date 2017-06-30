@@ -9,7 +9,7 @@
 				
 					<li class="widget-container widget_nav_menu"><!-- widgets list -->
 			
-						<h1 class="title-widget">Useful links</h1>
+						<h2 class="title-widget">Useful links</h2>
 						
 						<ul>
 							<li><a  href="#"><i class="fa fa-angle-double-right"></i> About Us</a></li>

@@ -107,11 +107,28 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping(path="/getrestos" ,method=RequestMethod.POST)
-	protected ResponseEntity<List<Restaurant>> getRestaurants(ModelAndView model, @RequestBody String restoId) throws Exception{
-		System.out.println("In the getRestaurants :"+restoId);
+	protected ResponseEntity<List<Restaurant>> getRestaurants(ModelAndView model, 
+			@RequestBody String areaId) throws Exception{
+		System.out.println("In the getRestaurants :"+areaId);
 		ResponseEntity<List<Restaurant>> response=null;
 
-		List<Restaurant> restos=getRestaurantList(restoId);
+		List<Restaurant> restos=getRestaurantList(areaId);
+		
+		response= new ResponseEntity<>(restos,HttpStatus.OK);  
+		model.addObject("home",true);
+		model.setViewName("home");
+
+		return response;
+	}
+	
+	
+	@RequestMapping(path="/getdishes" ,method=RequestMethod.POST)
+	protected ResponseEntity<List<Dish>> getDishes(ModelAndView model, 
+			@RequestBody String restoId) throws Exception{
+		System.out.println("In the getDishes :"+restoId);
+		ResponseEntity<List<Dish>> response=null;
+
+		List<Dish> restos=getDishList(restoId);
 		
 		response= new ResponseEntity<>(restos,HttpStatus.OK);  
 		model.addObject("home",true);
@@ -195,23 +212,32 @@ public class WelcomeController {
 		 return restaurants;
 	}
 	 
-	public static void getData() throws Exception {
+	public static List<Dish> getDishList(String restoId) throws Exception {
 		    Connection conn = null;
 		    Statement stmt = null;
 		    ResultSet rs = null;
 
+		    List<Dish> dishes= new ArrayList<Dish>();
+		    
 		    conn = getConnection();
 		    stmt = conn.createStatement();
-		    String excelQuery = "select username,password from login";
+		    String excelQuery = "select id,dishname,price from foodmenu where restoid="+restoId;
 		    rs = stmt.executeQuery(excelQuery);
 
 		    while (rs.next()) {
-		    	System.out.println("username :"+rs.getString("username"));
+		    	Dish dish= new Dish();
+		    	System.out.println("dishname :"+rs.getString("dishname"));
+		    	dish.setDishId(rs.getString("id"));
+		    	dish.setDishName(rs.getString("dishname"));
+		    	dish.setDishPrice(rs.getString("price"));
+		    	dishes.add(dish);
 		    }
 
 		    rs.close();
 		    stmt.close();
 		    conn.close();
+		    
+		    return dishes;
 		  }
 	 
 	 private static boolean isUserValid(String userName,String password) throws Exception{
